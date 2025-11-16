@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Make a Reservation - SHIKARI Restaurant</title>
+    <link rel="icon" href="/my logo.jpg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #c19a6b;
+        --secondary-color: #8b4513;
+        --accent-color: #d4af37;
+        --text-color: #333333;
+        --bg-color: #f9f5f0;
+        --card-bg: #ffffff;
+        --header-bg: rgba(255, 255, 255, 0.95);
+        --footer-bg: #2c2c2c;
+        --footer-text: #f0f0f0;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+      }
+
+      .dark-mode {
+        --primary-color: #c19a6b;
+        --secondary-color: #a67c52;
+        --accent-color: #d4af37;
+        --text-color: #f0f0f0;
+        --bg-color: #1a1a1a;
+        --card-bg: #2d2d2d;
+        --header-bg: rgba(30, 30, 30, 0.95);
+        --footer-bg: #121212;
+        --footer-text: #e0e0e0;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: var(--transition);
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: var(--header-bg);
+        box-shadow: var(--shadow);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: var(--transition);
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo h1 {
+        font-size: 28px;
+        color: var(--primary-color);
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .logo span {
+        color: var(--accent-color);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+        font-size: 16px;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      nav a:hover {
+        color: var(--primary-color);
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary-color);
+        transition: var(--transition);
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .theme-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: var(--text-color);
+        transition: var(--transition);
+      }
+
+      .theme-toggle:hover {
+        color: var(--primary-color);
+        transform: rotate(20deg);
+      }
+
+      .cart-icon {
+        position: relative;
+        font-size: 20px;
+        color: var(--text-color);
+        transition: var(--transition);
+      }
+
+      .cart-icon:hover {
+        color: var(--primary-color);
+      }
+
+      .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--text-color);
+        cursor: pointer;
+      }
+
+      /* Page Header */
+      .page-header {
+        margin-top: 100px;
+        padding: 60px 0;
+        text-align: center;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")
+            no-repeat center center/cover;
+        color: white;
+        border-radius: 8px;
+      }
+
+      .page-header h1 {
+        font-size: 48px;
+        margin-bottom: 15px;
+      }
+
+      .page-header p {
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Reservation Section */
+      .reservation-section {
+        padding: 80px 0;
+      }
+
+      .reservation-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+      }
+
+      .reservation-info h2 {
+        font-size: 36px;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .reservation-info h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 80px;
+        height: 3px;
+        background-color: var(--accent-color);
+      }
+
+      .reservation-info p {
+        margin-bottom: 30px;
+        font-size: 16px;
+      }
+
+      .info-cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-top: 40px;
+      }
+
+      .info-card {
+        background-color: var(--card-bg);
+        border-radius: 8px;
+        padding: 25px;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .info-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .info-card h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .info-card p {
+        margin-bottom: 0;
+        opacity: 0.8;
+      }
+
+      /* Reservation Form */
+      .reservation-form {
+        background-color: var(--card-bg);
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .form-title {
+        font-size: 24px;
+        margin-bottom: 25px;
+        color: var(--primary-color);
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--text-color);
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: var(--transition);
+        background-color: var(--bg-color);
+        color: var(--text-color);
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(193, 154, 107, 0.2);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+      }
+
+      select.form-control {
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 15px center;
+        background-size: 16px;
+      }
+
+      textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        width: 100%;
+      }
+
+      .btn:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Features Section */
+      .features {
+        padding: 60px 0;
+        background-color: var(--card-bg);
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .section-title h2 {
+        font-size: 36px;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background-color: var(--accent-color);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .feature-card {
+        background-color: var(--bg-color);
+        border-radius: 8px;
+        padding: 30px;
+        text-align: center;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .feature-icon {
+        font-size: 40px;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+      }
+
+      .feature-card h3 {
+        font-size: 22px;
+        margin-bottom: 15px;
+        color: var(--text-color);
+      }
+
+      .feature-card p {
+        color: var(--text-color);
+        opacity: 0.8;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--footer-bg);
+        color: var(--footer-text);
+        padding: 60px 0 20px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background-color: var(--accent-color);
+      }
+
+      .footer-column p,
+      .footer-column a {
+        color: var(--footer-text);
+        opacity: 0.8;
+        margin-bottom: 10px;
+        display: block;
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-column a:hover {
+        opacity: 1;
+        color: var(--primary-color);
+        padding-left: 5px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 14px;
+        opacity: 0.7;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .reservation-container {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header-container {
+          padding: 15px 0;
+        }
+
+        nav {
+          position: fixed;
+          top: 70px;
+          left: -100%;
+          width: 80%;
+          height: calc(100vh - 70px);
+          background-color: var(--header-bg);
+          flex-direction: column;
+          padding: 30px;
+          transition: var(--transition);
+          box-shadow: var(--shadow);
+        }
+
+        nav.active {
+          left: 0;
+        }
+
+        nav ul {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .page-header h1 {
+          font-size: 36px;
+        }
+
+        .page-header p {
+          font-size: 16px;
+        }
+
+        .reservation-info h2,
+        .section-title h2 {
+          font-size: 28px;
+        }
+
+        .reservation-form {
+          padding: 30px 20px;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .page-header h1 {
+          font-size: 32px;
+        }
+
+        .features-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container header-container">
+        <div class="logo">
+          <h1>SHI<span>KARI</span></h1>
+        </div>
+
+        <nav id="main-nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+          </button>
+          <a href="cart.html" class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+          </a>
+          <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Make a Reservation</h1>
+        <p>
+          Secure your table at SHIKARI for an unforgettable dining experience
+        </p>
+      </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section class="reservation-section">
+      <div class="container">
+        <div class="reservation-container">
+          <div class="reservation-info">
+            <h2>Reserve Your Table</h2>
+            <p>
+              At SHIKARI, we strive to provide exceptional dining experiences.
+              To ensure we can accommodate you perfectly, we recommend making
+              reservations in advance, especially for weekends and special
+              occasions.
+            </p>
+
+            <div class="info-cards">
+              <div class="info-card">
+                <h3><i class="fas fa-clock"></i> Opening Hours</h3>
+                <p><strong>Monday - Thursday:</strong> 11:00 AM - 10:00 PM</p>
+                <p><strong>Friday - Saturday:</strong> 11:00 AM - 11:00 PM</p>
+                <p><strong>Sunday:</strong> 12:00 PM - 9:00 PM</p>
+              </div>
+
+              <div class="info-card">
+                <h3><i class="fas fa-info-circle"></i> Reservation Policy</h3>
+                <p>
+                  We hold reservations for 15 minutes past the scheduled time.
+                  For groups of 8 or more, a 24-hour cancellation notice is
+                  required. A credit card may be required to secure large party
+                  reservations.
+                </p>
+              </div>
+
+              <div class="info-card">
+                <h3><i class="fas fa-phone"></i> Need Help?</h3>
+                <p>
+                  If you have any questions or need assistance with your
+                  reservation, please call us at
+                  <strong>+233 24 819 1726</strong> or email
+                  <strong>zenithzone18@gmail.com</strong>.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="reservation-form">
+            <h3 class="form-title">Book Your Table</h3>
+            <form id="reservationForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="date">Date</label>
+                  <input type="date" id="date" class="form-control" required />
+                </div>
+
+                <div class="form-group">
+                  <label for="time">Time</label>
+                  <select id="time" class="form-control" required>
+                    <option value="">Select Time</option>
+                    <option value="11:00">11:00 AM</option>
+                    <option value="11:30">11:30 AM</option>
+                    <option value="12:00">12:00 PM</option>
+                    <option value="12:30">12:30 PM</option>
+                    <option value="13:00">1:00 PM</option>
+                    <option value="13:30">1:30 PM</option>
+                    <option value="14:00">2:00 PM</option>
+                    <option value="14:30">2:30 PM</option>
+                    <option value="17:00">5:00 PM</option>
+                    <option value="17:30">5:30 PM</option>
+                    <option value="18:00">6:00 PM</option>
+                    <option value="18:30">6:30 PM</option>
+                    <option value="19:00">7:00 PM</option>
+                    <option value="19:30">7:30 PM</option>
+                    <option value="20:00">8:00 PM</option>
+                    <option value="20:30">8:30 PM</option>
+                    <option value="21:00">9:00 PM</option>
+                    <option value="21:30">9:30 PM</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="guests">Number of Guests</label>
+                  <select id="guests" class="form-control" required>
+                    <option value="">Select Guests</option>
+                    <option value="1">1 Person</option>
+                    <option value="2">2 People</option>
+                    <option value="3">3 People</option>
+                    <option value="4">4 People</option>
+                    <option value="5">5 People</option>
+                    <option value="6">6 People</option>
+                    <option value="7">7 People</option>
+                    <option value="8">8 People</option>
+                    <option value="9">9 People</option>
+                    <option value="10">10 People</option>
+                    <option value="11">11+ People</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="occasion">Occasion (Optional)</label>
+                  <select id="occasion" class="form-control">
+                    <option value="">Select Occasion</option>
+                    <option value="birthday">Birthday</option>
+                    <option value="anniversary">Anniversary</option>
+                    <option value="business">Business Dinner</option>
+                    <option value="date">Date Night</option>
+                    <option value="celebration">Celebration</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="firstName">First Name</label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    class="form-control"
+                    placeholder="Enter your first name"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="lastName">Last Name</label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    class="form-control"
+                    placeholder="Enter your last name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input
+                    type="email"
+                    id="email"
+                    class="form-control"
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Phone Number</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    class="form-control"
+                    placeholder="Enter your phone number"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="specialRequests">Special Requests</label>
+                <textarea
+                  id="specialRequests"
+                  class="form-control"
+                  placeholder="Any dietary restrictions, seating preferences, or special requests..."
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn">Complete Reservation</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="container">
+        <div class="section-title">
+          <h2>Why Reserve With Us</h2>
+          <p>Experience the SHIKARI difference</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-crown"></i>
+            </div>
+            <h3>Premium Experience</h3>
+            <p>
+              Enjoy our carefully curated dining atmosphere with attentive
+              service and exceptional attention to detail.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-utensils"></i>
+            </div>
+            <h3>Customized Menus</h3>
+            <p>
+              We accommodate dietary preferences and can create special menus
+              for celebrations and events.
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-glass-cheers"></i>
+            </div>
+            <h3>Perfect Ambiance</h3>
+            <p>
+              Our restaurant offers the ideal setting for any occasion, from
+              intimate dinners to large celebrations.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>SHIKARI</h3>
+            <p>
+              Experience the finest dining with our carefully crafted menu and
+              exceptional service.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.tiktok.com/@shikari.software?_r=1&_t=ZM-91RxU2Ey49D"
+                ><i class="fab fa-tiktok"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/shikari.software?igsh=aGdxd29qOWNtaW8y&utm_source=qr"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="https://x.com/shikarisoftware?s=21"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="https://wa.me/233248191726"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Tse - Addo, Accra</p>
+            <p><i class="fas fa-phone"></i> +233 24 819 1726</p>
+            <p><i class="fas fa-envelope"></i> zenithzone18@gmail.com</p>
+            <p><i class="fas fa-clock"></i> Open: Mon-Sun, 11am-11pm</p>
+          </div>
+
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
+            <a href="reservation.html">Reservations</a>
+          </div>
+
+          <div class="footer-column">
+            <h3>Newsletter</h3>
+            <p>Subscribe to our newsletter for updates and special offers.</p>
+            <form>
+              <input
+                type="email"
+                placeholder="Your Email"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  margin-bottom: 10px;
+                  border-radius: 4px;
+                  border: none;
+                "
+              />
+              <button type="submit" class="btn" style="width: 100%">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p>&copy; 2025 SHIKARI Restaurant. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Theme Toggle
+      const themeToggle = document.getElementById("theme-toggle");
+      const themeIcon = themeToggle.querySelector("i");
+
+      // Check for saved theme preference or use system preference
+      const savedTheme =
+        localStorage.getItem("theme") ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        themeIcon.classList.remove("fa-moon");
+        themeIcon.classList.add("fa-sun");
+      }
+
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+          themeIcon.classList.remove("fa-moon");
+          themeIcon.classList.add("fa-sun");
+          localStorage.setItem("theme", "dark");
+        } else {
+          themeIcon.classList.remove("fa-sun");
+          themeIcon.classList.add("fa-moon");
+          localStorage.setItem("theme", "light");
+        }
+      });
+
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mainNav = document.getElementById("main-nav");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        mainNav.classList.toggle("active");
+
+        if (mainNav.classList.contains("active")) {
+          mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+      });
+
+      // Set minimum date to today
+      const dateInput = document.getElementById("date");
+      const today = new Date();
+      const formattedDate = today.toISOString().split("T")[0];
+      dateInput.min = formattedDate;
+
+      // Set default date to tomorrow
+      const tomorrow = new Date(today);
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      const formattedTomorrow = tomorrow.toISOString().split("T")[0];
+      dateInput.value = formattedTomorrow;
+
+      // Reservation Form Submission
+      const reservationForm = document.getElementById("reservationForm");
+
+      reservationForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Get form values
+        const firstName = document.getElementById("firstName").value;
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
+        const guests = document.getElementById("guests").value;
+
+        // Format date for display
+        const reservationDate = new Date(date);
+        const options = {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        };
+        const formattedDateDisplay = reservationDate.toLocaleDateString(
+          "en-US",
+          options
+        );
+
+        // Format time for display
+        const timeDisplay = formatTime(time);
+
+        // Show success message
+        const notification = document.createElement("div");
+        notification.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <i class="fas fa-check-circle" style="font-size: 24px;"></i>
+                    <div>
+                        <h4 style="margin: 0 0 5px 0;">Reservation Confirmed!</h4>
+                        <p style="margin: 0;">Thank you, ${firstName}! Your table for ${guests} is reserved for ${formattedDateDisplay} at ${timeDisplay}.</p>
+                    </div>
+                </div>
+            `;
+        notification.style.position = "fixed";
+        notification.style.bottom = "20px";
+        notification.style.right = "20px";
+        notification.style.backgroundColor = "var(--primary-color)";
+        notification.style.color = "white";
+        notification.style.padding = "20px 25px";
+        notification.style.borderRadius = "8px";
+        notification.style.zIndex = "1000";
+        notification.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+        notification.style.maxWidth = "450px";
+        document.body.appendChild(notification);
+
+        // Reset form
+        reservationForm.reset();
+        dateInput.value = formattedTomorrow;
+
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+          notification.remove();
+        }, 5000);
+      });
+
+      // Helper function to format time
+      function formatTime(timeString) {
+        const [hours, minutes] = timeString.split(":");
+        const hour = parseInt(hours);
+        const ampm = hour >= 12 ? "PM" : "AM";
+        const displayHour = hour % 12 || 12;
+        return `${displayHour}:${minutes} ${ampm}`;
+      }
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us - SHIKARI Restaurant</title>
+    <link rel="icon" href="my logo.jpg" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #c19a6b;
+        --secondary-color: #8b4513;
+        --accent-color: #d4af37;
+        --text-color: #333333;
+        --bg-color: #f9f5f0;
+        --card-bg: #ffffff;
+        --header-bg: rgba(255, 255, 255, 0.95);
+        --footer-bg: #2c2c2c;
+        --footer-text: #f0f0f0;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
+      }
+
+      .dark-mode {
+        --primary-color: #c19a6b;
+        --secondary-color: #a67c52;
+        --accent-color: #d4af37;
+        --text-color: #f0f0f0;
+        --bg-color: #1a1a1a;
+        --card-bg: #2d2d2d;
+        --header-bg: rgba(30, 30, 30, 0.95);
+        --footer-bg: #121212;
+        --footer-text: #e0e0e0;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: var(--transition);
+        line-height: 1.6;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header Styles */
+      header {
+        background-color: var(--header-bg);
+        box-shadow: var(--shadow);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+        transition: var(--transition);
+      }
+
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo h1 {
+        font-size: 28px;
+        color: var(--primary-color);
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      .logo span {
+        color: var(--accent-color);
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+        font-size: 16px;
+        transition: var(--transition);
+        position: relative;
+      }
+
+      nav a:hover {
+        color: var(--primary-color);
+      }
+
+      nav a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary-color);
+        transition: var(--transition);
+      }
+
+      nav a:hover::after {
+        width: 100%;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .theme-toggle {
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: var(--text-color);
+        transition: var(--transition);
+      }
+
+      .theme-toggle:hover {
+        color: var(--primary-color);
+        transform: rotate(20deg);
+      }
+
+      .cart-icon {
+        position: relative;
+        font-size: 20px;
+        color: var(--text-color);
+        transition: var(--transition);
+      }
+
+      .cart-icon:hover {
+        color: var(--primary-color);
+      }
+
+      .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        width: 18px;
+        height: 18px;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 24px;
+        color: var(--text-color);
+        cursor: pointer;
+      }
+
+      /* Page Header */
+      .page-header {
+        margin-top: 100px;
+        padding: 60px 0;
+        text-align: center;
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+          url("https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")
+            no-repeat center center/cover;
+        color: white;
+        border-radius: 8px;
+      }
+
+      .page-header h1 {
+        font-size: 48px;
+        margin-bottom: 15px;
+      }
+
+      .page-header p {
+        font-size: 18px;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Contact Section */
+      .contact-section {
+        padding: 80px 0;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+      }
+
+      .contact-info h2 {
+        font-size: 36px;
+        color: var(--primary-color);
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .contact-info h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 80px;
+        height: 3px;
+        background-color: var(--accent-color);
+      }
+
+      .contact-info p {
+        margin-bottom: 30px;
+        font-size: 16px;
+      }
+
+      .contact-details {
+        margin-bottom: 40px;
+      }
+
+      .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 25px;
+      }
+
+      .contact-icon {
+        background-color: var(--primary-color);
+        color: white;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        flex-shrink: 0;
+      }
+
+      .contact-text h3 {
+        font-size: 18px;
+        margin-bottom: 5px;
+        color: var(--text-color);
+      }
+
+      .contact-text p {
+        margin-bottom: 0;
+        opacity: 0.8;
+      }
+
+      .opening-hours {
+        background-color: var(--card-bg);
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .opening-hours h3 {
+        font-size: 22px;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+      }
+
+      .hours-list {
+        list-style: none;
+      }
+
+      .hours-list li {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .hours-list li:last-child {
+        border-bottom: none;
+      }
+
+      .day {
+        font-weight: 600;
+      }
+
+      .time {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+
+      /* Contact Form */
+      .contact-form {
+        background-color: var(--card-bg);
+        padding: 40px;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .form-title {
+        font-size: 24px;
+        margin-bottom: 25px;
+        color: var(--primary-color);
+        text-align: center;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--text-color);
+      }
+
+      .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: var(--transition);
+        background-color: var(--bg-color);
+        color: var(--text-color);
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(193, 154, 107, 0.2);
+      }
+
+      textarea.form-control {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 30px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+        width: 100%;
+      }
+
+      .btn:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Map Section */
+      .map-section {
+        padding: 60px 0;
+        background-color: var(--card-bg);
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 50px;
+      }
+
+      .section-title h2 {
+        font-size: 36px;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .section-title h2::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background-color: var(--accent-color);
+      }
+
+      .map-container {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        height: 400px;
+      }
+
+      .map-placeholder {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          #f5f5f5 25%,
+          #e0e0e0 25%,
+          #e0e0e0 50%,
+          #f5f5f5 50%,
+          #f5f5f5 75%,
+          #e0e0e0 75%
+        );
+        background-size: 40px 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #888;
+        text-align: center;
+      }
+
+      .map-placeholder i {
+        font-size: 60px;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+      }
+
+      .map-placeholder p {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      /* FAQ Section */
+      .faq-section {
+        padding: 80px 0;
+      }
+
+      .faq-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+        gap: 30px;
+      }
+
+      .faq-item {
+        background-color: var(--card-bg);
+        border-radius: 8px;
+        padding: 25px;
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .faq-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .faq-question {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: var(--primary-color);
+        display: flex;
+        align-items: flex-start;
+      }
+
+      .faq-question i {
+        margin-right: 10px;
+        color: var(--accent-color);
+      }
+
+      .faq-answer {
+        color: var(--text-color);
+        opacity: 0.8;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--footer-bg);
+        color: var(--footer-text);
+        padding: 60px 0 20px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+        position: relative;
+        padding-bottom: 10px;
+      }
+
+      .footer-column h3::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 2px;
+        background-color: var(--accent-color);
+      }
+
+      .footer-column p,
+      .footer-column a {
+        color: var(--footer-text);
+        opacity: 0.8;
+        margin-bottom: 10px;
+        display: block;
+        text-decoration: none;
+        transition: var(--transition);
+      }
+
+      .footer-column a:hover {
+        opacity: 1;
+        color: var(--primary-color);
+        padding-left: 5px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+      }
+
+      .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transition: var(--transition);
+      }
+
+      .social-links a:hover {
+        background-color: var(--primary-color);
+        transform: translateY(-3px);
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        font-size: 14px;
+        opacity: 0.7;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 992px) {
+        .contact-grid {
+          grid-template-columns: 1fr;
+          gap: 40px;
+        }
+
+        .faq-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .header-container {
+          padding: 15px 0;
+        }
+
+        nav {
+          position: fixed;
+          top: 70px;
+          left: -100%;
+          width: 80%;
+          height: calc(100vh - 70px);
+          background-color: var(--header-bg);
+          flex-direction: column;
+          padding: 30px;
+          transition: var(--transition);
+          box-shadow: var(--shadow);
+        }
+
+        nav.active {
+          left: 0;
+        }
+
+        nav ul {
+          flex-direction: column;
+          gap: 20px;
+        }
+
+        .mobile-menu-btn {
+          display: block;
+        }
+
+        .page-header h1 {
+          font-size: 36px;
+        }
+
+        .page-header p {
+          font-size: 16px;
+        }
+
+        .contact-info h2,
+        .section-title h2 {
+          font-size: 28px;
+        }
+
+        .contact-form {
+          padding: 30px 20px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .page-header h1 {
+          font-size: 32px;
+        }
+
+        .faq-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .contact-item {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .contact-icon {
+          margin-right: 0;
+          margin-bottom: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container header-container">
+        <div class="logo">
+          <h1>SHI<span>KARI</span></h1>
+        </div>
+
+        <nav id="main-nav">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="menu.html">Menu</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html" class="active">Contact</a></li>
+            <li><a href="cart.html">Cart</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <button class="theme-toggle" id="theme-toggle">
+            <i class="fas fa-moon"></i>
+          </button>
+          <a href="cart.html" class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="cart-count">0</span>
+          </a>
+          <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Contact Us</h1>
+        <p>
+          We'd love to hear from you. Get in touch with us for reservations,
+          inquiries, or feedback
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h2>Get In Touch</h2>
+            <p>
+              Have questions about our menu, want to make a reservation, or
+              simply want to share your dining experience? We're here to help
+              and would love to hear from you.
+            </p>
+
+            <div class="contact-details">
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="contact-text">
+                  <h3>Our Location</h3>
+                  <p>Tse - Addo,<br />Accra, Ghana</p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div class="contact-text">
+                  <h3>Phone Number</h3>
+                  <p>+233 24 819 1726<br />+233 24 819 1726</p>
+                </div>
+              </div>
+
+              <div class="contact-item">
+                <div class="contact-icon">
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div class="contact-text">
+                  <h3>Email Address</h3>
+                  <p>zenithzone18@gmail.com<br />zenithzone18@gmail.com</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="opening-hours">
+              <h3>Opening Hours</h3>
+              <ul class="hours-list">
+                <li>
+                  <span class="day">Monday - Thursday</span>
+                  <span class="time">11:00 AM - 10:00 PM</span>
+                </li>
+                <li>
+                  <span class="day">Friday - Saturday</span>
+                  <span class="time">11:00 AM - 11:00 PM</span>
+                </li>
+                <li>
+                  <span class="day">Sunday</span>
+                  <span class="time">12:00 PM - 9:00 PM</span>
+                </li>
+                <li>
+                  <span class="day">Public Holidays</span>
+                  <span class="time">12:00 PM - 8:00 PM</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <h3 class="form-title">Send Us a Message</h3>
+            <form id="contactForm">
+              <div class="form-group">
+                <label for="name">Full Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="form-control"
+                  placeholder="Enter your full name"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                  type="email"
+                  id="email"
+                  class="form-control"
+                  placeholder="Enter your email address"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  class="form-control"
+                  placeholder="Enter your phone number"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="subject">Subject</label>
+                <input
+                  type="text"
+                  id="subject"
+                  class="form-control"
+                  placeholder="What is this regarding?"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Message</label>
+                <textarea
+                  id="message"
+                  class="form-control"
+                  placeholder="Tell us how we can help you..."
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="map-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Find Us</h2>
+          <p>Visit us at our convenient location in Accra</p>
+        </div>
+
+        <div class="map-container">
+          <div class="map-placeholder">
+            <i class="fas fa-map-marked-alt"></i>
+            <h3>Our Location</h3>
+            <p>123 Gourmet Avenue, East Legon, Accra, Ghana</p>
+            <p>Interactive map can be embedded here</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="container">
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+          <p>Quick answers to common questions</p>
+        </div>
+
+        <div class="faq-grid">
+          <div class="faq-item">
+            <div class="faq-question">
+              <i class="fas fa-question-circle"></i>
+              Do I need to make a reservation?
+            </div>
+            <div class="faq-answer">
+              While walk-ins are welcome, we highly recommend making a
+              reservation, especially on weekends and during peak hours, to
+              ensure we can accommodate you.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <i class="fas fa-question-circle"></i>
+              Is there parking available?
+            </div>
+            <div class="faq-answer">
+              Yes, we offer complimentary valet parking for all our guests. Our
+              parking area can accommodate up to 50 vehicles.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <i class="fas fa-question-circle"></i>
+              Do you accommodate dietary restrictions?
+            </div>
+            <div class="faq-answer">
+              Absolutely. Our chefs can accommodate various dietary needs
+              including vegetarian, vegan, gluten-free, and allergies. Please
+              inform us in advance.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <i class="fas fa-question-circle"></i>
+              What is your cancellation policy?
+            </div>
+            <div class="faq-answer">
+              We kindly request at least 2 hours notice for cancellations. For
+              large groups (8+ people), we require 24 hours notice.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <i class="fas fa-question-circle"></i>
+              Do you host private events?
+            </div>
+            <div class="faq-answer">
+              Yes, we have private dining spaces available for events ranging
+              from intimate gatherings to corporate functions. Contact our
+              events team for details.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <i class="fas fa-question-circle"></i>
+              Is the restaurant child-friendly?
+            </div>
+            <div class="faq-answer">
+              We welcome guests of all ages. We offer a children's menu and high
+              chairs are available upon request.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>SHIKARI</h3>
+            <p>
+              Experience the finest dining with our carefully crafted menu and
+              exceptional service.
+            </p>
+            <div class="social-links">
+              <a
+                href="https://www.tiktok.com/@shikari.software?_r=1&_t=ZM-91RxU2Ey49D"
+                ><i class="fab fa-tiktok"></i
+              ></a>
+              <a
+                href="https://www.instagram.com/shikari.software?igsh=aGdxd29qOWNtaW8y&utm_source=qr"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <a href="https://x.com/shikarisoftware?s=21"
+                ><i class="fab fa-twitter"></i
+              ></a>
+              <a href="https://wa.me/233248191726"
+                ><i class="fab fa-whatsapp"></i
+              ></a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Contact Info</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Tse - Addo, Accra</p>
+            <p><i class="fas fa-phone"></i> +233 24 819 1726</p>
+            <p><i class="fas fa-envelope"></i> zenithzone18@gmail.com</p>
+            <p><i class="fas fa-clock"></i> Open: Mon-Sun, 11am-11pm</p>
+          </div>
+
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <a href="index.html">Home</a>
+            <a href="menu.html">Menu</a>
+            <a href="about.html">About Us</a>
+            <a href="contact.html">Contact</a>
+            <a href="reservation.html">Reservations</a>
+          </div>
+
+          <div class="footer-column">
+            <h3>Newsletter</h3>
+            <p>Subscribe to our newsletter for updates and special offers.</p>
+            <form>
+              <input
+                type="email"
+                placeholder="Your Email"
+                style="
+                  width: 100%;
+                  padding: 10px;
+                  margin-bottom: 10px;
+                  border-radius: 4px;
+                  border: none;
+                "
+              />
+              <button type="submit" class="btn" style="width: 100%">
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <div class="copyright">
+          <p>&copy; 2025 SHIKARI Restaurant. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Theme Toggle
+      const themeToggle = document.getElementById("theme-toggle");
+      const themeIcon = themeToggle.querySelector("i");
+
+      // Check for saved theme preference or use system preference
+      const savedTheme =
+        localStorage.getItem("theme") ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light");
+      if (savedTheme === "dark") {
+        document.body.classList.add("dark-mode");
+        themeIcon.classList.remove("fa-moon");
+        themeIcon.classList.add("fa-sun");
+      }
+
+      themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+
+        if (document.body.classList.contains("dark-mode")) {
+          themeIcon.classList.remove("fa-moon");
+          themeIcon.classList.add("fa-sun");
+          localStorage.setItem("theme", "dark");
+        } else {
+          themeIcon.classList.remove("fa-sun");
+          themeIcon.classList.add("fa-moon");
+          localStorage.setItem("theme", "light");
+        }
+      });
+
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mainNav = document.getElementById("main-nav");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        mainNav.classList.toggle("active");
+
+        if (mainNav.classList.contains("active")) {
+          mobileMenuBtn.innerHTML = '<i class="fas fa-times"></i>';
+        } else {
+          mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        }
+      });
+
+      // Contact Form Submission
+      const contactForm = document.getElementById("contactForm");
+
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Get form values
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const subject = document.getElementById("subject").value;
+
+        // Show success message
+        const notification = document.createElement("div");
+        notification.textContent = `Thank you, ${name}! Your message has been sent successfully.`;
+        notification.style.position = "fixed";
+        notification.style.bottom = "20px";
+        notification.style.right = "20px";
+        notification.style.backgroundColor = "var(--primary-color)";
+        notification.style.color = "white";
+        notification.style.padding = "15px 25px";
+        notification.style.borderRadius = "4px";
+        notification.style.zIndex = "1000";
+        notification.style.boxShadow = "0 4px 12px rgba(0,0,0,0.2)";
+        notification.style.maxWidth = "400px";
+        document.body.appendChild(notification);
+
+        // Reset form
+        contactForm.reset();
+
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+          notification.remove();
+        }, 5000);
+      });
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          const targetId = this.getAttribute("href");
+          if (targetId === "#") return;
+
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            window.scrollTo({
+              top: targetElement.offsetTop - 80,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
