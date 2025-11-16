@@ -780,7 +780,7 @@
           >
             <div class="item-image">
               <img
-                src="https://images.unsplash.com/photo-1565299585323-38174c13fae8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+                src="https://images.unsplash.com/photo-1488477181946-6428a0291777?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
                 alt="Stuffed Mushrooms"
               />
             </div>
@@ -1228,6 +1228,26 @@
     </footer>
 
     <script>
+      // Prevent right-click context menu
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        return false;
+      });
+
+      // Prevent F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+      document.addEventListener("keydown", function (e) {
+        if (
+          e.key === "F12" ||
+          (e.ctrlKey && e.shiftKey && e.key === "I") ||
+          (e.ctrlKey && e.shiftKey && e.key === "J") ||
+          (e.ctrlKey && e.key === "U") ||
+          (e.ctrlKey && e.key === "u")
+        ) {
+          e.preventDefault();
+          return false;
+        }
+      });
+
       // Theme Toggle
       const themeToggle = document.getElementById("theme-toggle");
       const themeIcon = themeToggle.querySelector("i");

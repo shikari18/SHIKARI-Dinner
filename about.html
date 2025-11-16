@@ -188,7 +188,7 @@
         padding: 60px 0;
         text-align: center;
         background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-          url("https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")
+          url("https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80")
             no-repeat center center/cover;
         color: white;
         border-radius: 8px;
@@ -1019,6 +1019,26 @@
     </footer>
 
     <script>
+      // Prevent right-click context menu
+      document.addEventListener("contextmenu", function (e) {
+        e.preventDefault();
+        return false;
+      });
+
+      // Prevent F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+      document.addEventListener("keydown", function (e) {
+        if (
+          e.key === "F12" ||
+          (e.ctrlKey && e.shiftKey && e.key === "I") ||
+          (e.ctrlKey && e.shiftKey && e.key === "J") ||
+          (e.ctrlKey && e.key === "U") ||
+          (e.ctrlKey && e.key === "u")
+        ) {
+          e.preventDefault();
+          return false;
+        }
+      });
+
       // Theme Toggle
       const themeToggle = document.getElementById("theme-toggle");
       const themeIcon = themeToggle.querySelector("i");
